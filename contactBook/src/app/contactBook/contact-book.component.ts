@@ -21,14 +21,23 @@ export class ContactBookComponent implements OnInit {
 
   ngOnInit(): void{
     this.title = 'My Contact Book!';
+    this.getContacts();
+  }
+  getContacts(){
     this.contactBookService.getContacts()
       .subscribe(
         contacts => {this.contacts = contacts},
         error => console.log(error)
         );
   }
-
   toggleFavorite(contact){
-
+    this.contactBookService.setFavorite(contact)
+      .subscribe(
+        contact => {
+          this.getContacts();
+          console.log(contact);
+        },
+        error => console.log(error)
+        );
   }
 }
