@@ -12,5 +12,12 @@
       "es2016",
       "dom"
     ]
-  }
+  },
+  "filesGlob": [
+            "**/*.ts",
+            "!dist/**",
+            "!node_modules/**",
+            "node_modules/@types/**/*.d.ts",
+            "node_modules/@angular/**/*.d.ts"
+        ],
 }

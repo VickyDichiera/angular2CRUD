@@ -1,1 +1,18 @@
+<div class="container-fluid">
 <h1> {{title}} </h1>
+
+<h2>Contacts:</h2>
+   <ul class="contact-list">
+     <li *ngFor="let contact of contacts" class="card">
+       <div class="panel panel-default">
+         <div class="panel-body">
+           <p class="name">{{ contact.name }}</p>
+           <div class="info">
+             <label>Phone: </label><span>{{ contact.phone }}</span>
+             <button class="btn btn-default favorite" (click)="toggleFavorite(contact)"><span class="glyphicon" [ngClass]="{'glyphicon-heart colored': contact.favorite ,'glyphicon-heart-empty': !contact.favorite }" aria-hidden="true"></span> Favorite</button>
+           </div>
+        </div>
+      </div>
+     </li>
+   </ul>
+</div>
