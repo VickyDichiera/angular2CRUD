@@ -2,6 +2,8 @@ import { Component, OnInit }  from '@angular/core';
 import { ContactBookService } from '../contact-book.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable }         from 'rxjs/Observable';
+import { FormGroup, FormControl, Validators, FormBuilder }
+    from '@angular/forms';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -15,11 +17,13 @@ import 'rxjs/add/operator/switchMap';
 export class ContactEditionComponent implements OnInit {
   contact: any;
   title: string;
+  contactForm: FormGroup;
 
   constructor(
     private contactBookService: ContactBookService,
     private router: Router,
     private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void{
@@ -27,9 +31,20 @@ export class ContactEditionComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.contactBookService.getContact(params['id']))
         .subscribe(
-          contact => this.contact = contact,
+          contact => {this.contact = contact; this.initializeForm()},
           error => console.log(error)
         );
+  }
+  initializeForm(){
+    this.contactForm = this.formBuilder.group({
+            "name": [this.contact.name, Validators.required],
+            "email": [this.contact.email, Validators.required],
+            "phone": [this.contact.phone, Validators.required]
+        });
+  }
+  onSubmit() {
+    console.log("model-based form submitted: ");
+    console.log(this.contactForm);
   }
   toggleFavorite(contact){
     this.contactBookService.setFavorite(contact)
