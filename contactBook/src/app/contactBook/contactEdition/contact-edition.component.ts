@@ -43,8 +43,15 @@ export class ContactEditionComponent implements OnInit {
         });
   }
   onSubmit() {
-    console.log("model-based form submitted: ");
-    console.log(this.contactForm);
+    let updatedContact = this.contactForm.value;
+    updatedContact['id'] = this.contact.id;
+    this.contactBookService.updateContact(updatedContact)
+      .subscribe(
+        contact => {
+          console.log(contact);
+        },
+        error => console.log(error)
+        );
   }
   toggleFavorite(contact){
     this.contactBookService.setFavorite(contact)

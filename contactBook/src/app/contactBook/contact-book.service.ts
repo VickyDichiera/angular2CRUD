@@ -32,4 +32,10 @@ export class ContactBookService {
       .map(response => response)
       .catch(error => Observable.throw(error.json() || 'Server error'));
   }
+  updateContact(contact: any): any{
+    const url = `${this.contactsUrl}/${contact.id}`;
+    return this.http.put(url, JSON.stringify(contact), {headers: this.headers})
+      .map(response => response)
+      .catch(error => Observable.throw(error.json() || 'Server error'));
+  }
 }
