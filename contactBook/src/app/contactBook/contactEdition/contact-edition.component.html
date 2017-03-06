@@ -1,9 +1,7 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="contact">
 <h1> {{title}} </h1>
 
-<h2>Contacts:</h2>
-   <ul class="contact-list">
-     <li *ngFor="let contact of contacts" class="card">
+<h2>Contact: </h2>
        <div class="panel panel-default">
          <div class="panel-body">
            <p class="name">{{ contact.name }}</p>
@@ -15,14 +13,11 @@
                </span> Favorite</button>
              </p>
              <p>
-               <button class="btn btn-default" (click)="gotoEdition(contact.id)">
-                 <span class="glyphicon glyphicon-edit" aria-hidden="true"> Edit</span>
-                 <!--a [routerLink]="['/contact-edition', contact.id]">Edit</a-->
+               <button class="btn btn-default">
+                 Submit
               </button>
              </p>
            </div>
         </div>
       </div>
-     </li>
-   </ul>
 </div>

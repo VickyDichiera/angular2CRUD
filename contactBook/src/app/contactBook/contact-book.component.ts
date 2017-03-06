@@ -20,15 +20,15 @@ export class ContactBookComponent implements OnInit {
   ) {}
 
   ngOnInit(): void{
-    this.title = 'My Contact Book!';
-    this.getContacts();
+      this.title = 'My Contact Book!';
+      this.getContacts();
   }
   getContacts(){
     this.contactBookService.getContacts()
       .subscribe(
         contacts => {this.contacts = contacts},
         error => console.log(error)
-        );
+      );
   }
   toggleFavorite(contact){
     this.contactBookService.setFavorite(contact)
@@ -39,5 +39,8 @@ export class ContactBookComponent implements OnInit {
         },
         error => console.log(error)
         );
+  }
+  gotoEdition(contactId): void {
+    this.router.navigate(['/contact-edition', contactId]);
   }
 }

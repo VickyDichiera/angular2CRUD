@@ -16,6 +16,12 @@ export class ContactBookService {
       .map(response => response.json().data)
       .catch(error => Observable.throw(error.json().error || 'Server error'));
   }
+  getContact(contactId): any{
+    const url = `${this.contactsUrl}/${contactId}`;
+    return this.http.get(url)
+      .map(response => response.json().data)
+      .catch(error => Observable.throw(error.json() || 'Server error'));
+  }
 
   private headers = new Headers({'Content-Type': 'application/json'});
 

@@ -10,12 +10,16 @@ import { InMemoryDataService }  from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { ContactBookComponent } from './contactBook/contact-book.component';
+import { ContactEditionComponent } from './contactBook/contactEdition/contact-edition.component';
 import { ContactBookService } from './contactBook/contact-book.service'
 
 const appRoutes : Routes = [
   {
     path: 'contact-book',
     component: ContactBookComponent,
+  },{
+    path: 'contact-edition/:id',
+    component: ContactEditionComponent,
   },
   {
     path: '',
@@ -27,7 +31,8 @@ const appRoutes : Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ContactBookComponent
+    ContactBookComponent,
+    ContactEditionComponent
   ],
   imports: [
     BrowserModule,
