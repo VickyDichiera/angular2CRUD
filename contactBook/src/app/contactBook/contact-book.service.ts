@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers }       from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import { Router }      from '@angular/router';
+
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -8,7 +10,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ContactBookService {
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router) { }
   private contactsUrl = 'api/contacts';
 
   getContacts(): Observable<any[]> {
@@ -35,7 +37,10 @@ export class ContactBookService {
   updateContact(contact: any): any{
     const url = `${this.contactsUrl}/${contact.id}`;
     return this.http.put(url, JSON.stringify(contact), {headers: this.headers})
-      .map(response => response)
+      .map(()=>this.goBack())
       .catch(error => Observable.throw(error.json() || 'Server error'));
+  }
+  goBack(){
+    this.router.navigate(['/contact-book']);
   }
 }
