@@ -25,10 +25,6 @@
                  <button class="btn btn-primary" type="submit" [disabled]="!contactForm.valid">
                     Submit
                  </button>
-
-                 <button class="btn btn-danger" (click)="deleteContact($event,contact)">
-                    Delete
-                 </button>
                </p>
              </form>
              <p>Form value: {{ contactForm.value | json }}</p>
@@ -38,16 +34,3 @@
       </div>
     </div>
 </div>
-<div class="modal fade delete-alert" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Are you sure do you want to delete {{contact.name}}?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)=deleteConfirm($event, 'y')>Yes</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)=deleteConfirm($event, 'n')>No</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->

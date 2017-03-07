@@ -68,26 +68,6 @@ export class ContactEditionComponent implements OnInit {
   goBack(){
     this.router.navigate(['/contact-book']);
   }
-
-  deleteContact(event, option){
-      event.preventDefault();
-      if(option === 'y'){
-        this.contactBookService.deleteContact(this.contact)
-          .subscribe(
-            contact => {
-              console.log("contact deleted");
-            },
-            error => console.log(error)
-          );
-      }
-      /*this.contactBookService.setFavorite(contact)
-        .subscribe(
-          contact => {
-            console.log("updated favorite");
-          },
-          error => console.log(error)
-        );*/
-    }
 /*
   getContacts(){
     this.contactBookService.getContacts()
