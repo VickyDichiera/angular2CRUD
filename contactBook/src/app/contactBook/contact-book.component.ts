@@ -35,7 +35,7 @@ export class ContactBookComponent implements OnInit {
       .subscribe(
         contact => {
           this.getContacts();
-          console.log(contact);
+          //console.log(contact);
         },
         error => console.log(error)
         );

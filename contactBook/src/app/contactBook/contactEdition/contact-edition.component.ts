@@ -42,26 +42,52 @@ export class ContactEditionComponent implements OnInit {
             "phone": [this.contact.phone, Validators.required]
         });
   }
+
+  toggleFavorite(event, contact){
+    event.preventDefault();
+    this.contactBookService.setFavorite(contact)
+      .subscribe(
+        contact => {
+          console.log("updated favorite");
+        },
+        error => console.log(error)
+        );
+  }
   onSubmit() {
     let updatedContact = this.contactForm.value;
     updatedContact['id'] = this.contact.id;
     this.contactBookService.updateContact(updatedContact)
       .subscribe(
         contact => {
-          console.log(contact);
+          console.log("updated contact");
+          this.goBack();
         },
         error => console.log(error)
         );
   }
-  toggleFavorite(contact){
-    this.contactBookService.setFavorite(contact)
-      .subscribe(
-        contact => {
-          console.log(contact);
-        },
-        error => console.log(error)
-        );
+  goBack(){
+    this.router.navigate(['/contact-book']);
   }
+
+  deleteContact(event, option){
+      event.preventDefault();
+      if(option === 'y'){
+        this.contactBookService.deleteContact(this.contact)
+          .subscribe(
+            contact => {
+              console.log("contact deleted");
+            },
+            error => console.log(error)
+          );
+      }
+      /*this.contactBookService.setFavorite(contact)
+        .subscribe(
+          contact => {
+            console.log("updated favorite");
+          },
+          error => console.log(error)
+        );*/
+    }
 /*
   getContacts(){
     this.contactBookService.getContacts()

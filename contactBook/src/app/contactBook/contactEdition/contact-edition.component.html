@@ -2,8 +2,9 @@
 <h1> {{title}} </h1>
 
 <h2>Contact: </h2>
+  <div class="card">
        <div class="panel panel-default">
-         <div class="panel-body">
+         <div class="panel-body" >
            <p class="name">{{ contact.name }}</p>
            <div class="info">
              <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
@@ -17,12 +18,16 @@
                  <input type="text" formControlName="phone">
                </p>
                <p>
-                 <button class="btn btn-default favorite" (click)="toggleFavorite(contact)"><span class="glyphicon" [ngClass]="{'glyphicon-heart colored': contact.favorite ,'glyphicon-heart-empty': !contact.favorite }" aria-hidden="true">
+                 <button class="btn btn-default favorite" (click)="toggleFavorite($event,contact)"><span class="glyphicon" [ngClass]="{'glyphicon-heart colored': contact.favorite ,'glyphicon-heart-empty': !contact.favorite }" aria-hidden="true">
                  </span> Favorite</button>
                </p>
                <p>
-                 <button class="btn btn-default" type="submit" [disabled]="!contactForm.valid">
+                 <button class="btn btn-primary" type="submit" [disabled]="!contactForm.valid">
                     Submit
+                 </button>
+
+                 <button class="btn btn-danger" (click)="deleteContact($event,contact)">
+                    Delete
                  </button>
                </p>
              </form>
@@ -31,4 +36,18 @@
            </div>
         </div>
       </div>
+    </div>
 </div>
+<div class="modal fade delete-alert" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure do you want to delete {{contact.name}}?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)=deleteConfirm($event, 'y')>Yes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)=deleteConfirm($event, 'n')>No</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

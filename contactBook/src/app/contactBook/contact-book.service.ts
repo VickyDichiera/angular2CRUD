@@ -37,10 +37,8 @@ export class ContactBookService {
   updateContact(contact: any): any{
     const url = `${this.contactsUrl}/${contact.id}`;
     return this.http.put(url, JSON.stringify(contact), {headers: this.headers})
-      .map(()=>this.goBack())
+      .map(response => response)
       .catch(error => Observable.throw(error.json() || 'Server error'));
   }
-  goBack(){
-    this.router.navigate(['/contact-book']);
-  }
+
 }
